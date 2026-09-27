@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Steersman: guided walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#EEF1F3; --panel:#E1E6EA; --ink:#17202B; --muted:#52606C; --rule:#B3BCC5; --signal:#B8321F; --teal:#23706B; --scope:#1C2430;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141A21; --panel:#1C242D; --ink:#E3E7EA; --muted:#9AA6B1; --rule:#2E3945; --signal:#E36A52; --teal:#62B8B1;}}
+:root[data-theme="dark"]{--paper:#141A21; --panel:#1C242D; --ink:#E3E7EA; --muted:#9AA6B1; --rule:#2E3945; --signal:#E36A52; --teal:#62B8B1;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(16px + env(safe-area-inset-top,0px))}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:"Aptos","Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif; font-size:17px; line-height:1.55}
+main{max-width:780px; margin:0 auto; padding:40px clamp(18px,4vw,40px) 72px}
+header{border-bottom:2px solid var(--ink); padding-bottom:18px; margin-bottom:22px}
+.kicker{margin:0 0 6px; color:var(--muted)}
+h1{margin:0; font-size:clamp(40px,7vw,64px); line-height:1; font-weight:700; letter-spacing:-0.02em}
+.lede{margin:10px 0 0; font-size:15px; color:var(--muted); max-width:100%; width:100%}
+.about{color:var(--muted)}
+h2.sub{font-size:20px}
+h2{font-size:26px; line-height:1.2; margin:44px 0 12px; font-weight:700; padding-top:14px; border-top:1.5px solid var(--rule); display:flex; gap:12px; align-items:baseline}
+.n{font-size:30px; color:var(--signal); min-width:1.1em}
+h3{font-size:20px; margin:0 0 6px; font-weight:700}
+h3 span{font-weight:400; color:var(--muted); font-size:16px}
+p{margin:0 0 12px}
+a{color:var(--teal)}
+code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:.88em; background:var(--panel); padding:1px 4px}
+.see{background:var(--panel); padding:10px 14px}
+.assignment ul{margin:0; padding-left:22px}
+h2.first{border-top:0; padding-top:0; margin-top:0}
+.assignment li{margin-bottom:6px}
+.stances{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; margin:10px 0 16px}
+.stance{display:block; border:1.5px solid var(--ink); padding:12px 14px; color:var(--ink); text-decoration:none}
+.stance:hover{background:var(--panel)}
+.stance p{margin:0; font-size:15.5px}
+.code{position:relative; margin:8px 0 14px}
+.code pre{margin:0; background:#F7F8F9; color:#1F2328; border:1.5px solid #D0D7DE; padding:16px 18px; overflow-x:auto; font-size:14px; line-height:1.5}
+.t-com{color:#6E7781; font-style:italic}
+.t-str{color:#0A7A3E}
+.t-num{color:#B35900}
+.t-kw{color:#8250DF; font-weight:600}
+.t-cb{color:#CF222E; font-weight:600}
+.t-fn{color:#0550AE}
+.t-var{color:#953800}
+.code pre code{background:none; padding:0; font-size:inherit; color:inherit}
+.copy{position:absolute; top:8px; right:8px; font:inherit; font-size:13px; font-weight:600; background:#F7F8F9; color:#1F2328; border:1.5px solid #8C959F; border-radius:0; padding:3px 10px; cursor:pointer}
+.copy:hover{border-color:#1F2328}
+.recipe{margin:34px 0; padding-top:18px; border-top:1.5px dashed var(--rule)}
+.recipe:first-of-type{border-top:0; padding-top:0}
+.idea{color:var(--muted)}
+.edit{margin-top:16px}
+dl dt{font-weight:700; margin-top:14px}
+dl dd{margin:4px 0 0}
+button:focus-visible,a:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
+@media print{
+  :root{--paper:#fff; --panel:#F0F2F4; --ink:#000; --muted:#444}
+  .copy{display:none}
+  .code pre{background:#fff; border:1px solid #bbb; white-space:pre-wrap}
+  .step,.stance,.code,.see{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Steersman</h1>
+  <p class="lede">A guided walkthrough: take a working generative sketch, add a feedback loop inspired by one of today’s figures, and see how one number changes what it does.</p>
+</header>
+
+<section class="assignment">
+<h2 class="plain first">Assignment</h2>
+<ul>
+  <li>Load the starter sketch 📁1_steersman.</li>
+  <li>Follow the step-by-step guide to choose a stance and edit the code accordingly by following the instructions. You only need to pick and submit ONE stance.</li>
+  <li>Push your work to GitHub.</li>
+  <li>Submit the link to your GitHub repo on NTULearn.</li>
+</ul>
+</section>
+
+<section id="s2" class="step">
+<h2 class="sub">Find the Loop</h2>
+<p>Look at <code>draw()</code>. Every frame, the sketch does three things:</p>
+<ol>
+  <li><code>sense()</code> reads how bright the canvas is under each dot. The dots are reading the trails they drew themselves. That is the feedback loop.</li>
+  <li><code>update()</code> uses that reading to turn each dot. <code>gain</code> sets how strongly the reading steers them.</li>
+  <li><code>render()</code> draws the dots.</li>
+</ol>
+<p>Now change <code>let gain = 1.0;</code> to <code>let gain = 0;</code>, save and refresh. Then try <code>let gain = 3;</code>.</p>
+<p class="see"><strong>What you should see:</strong> at 0 the dots wander at random; the loop is switched off. At 3 they react strongly to their own trails and start gathering into shapes.</p>
+<p>Set the gain back to <code>1.0</code> before moving on.</p>
+</section>
+
+<section id="s3" class="step">
+<h2 class="sub">Choose a Stance</h2>
+<p>Pick ONE. Click it to jump to its code.</p>
+<div class="stances"><a class="stance" href="#conversation"><h3>Conversation <span>After Pask</span></h3><p>The work follows your mouse, but gets bored if you keep moving the same way.</p></a><a class="stance" href="#search"><h3>Search <span>After Ashby</span></h3><p>When the canvas gets too empty or too full, the system throws away its rules and picks new ones at random.</p></a><a class="stance" href="#resonance"><h3>Resonance <span>After Lucier</span></h3><p>The canvas is fed back into itself, slightly larger and blurrier, until only the process is left.</p></a><a class="stance" href="#exposure"><h3>Exposure <span>After Haacke</span></h3><p>Agents compete for a resource on the ground. The more they have, the more they can take.</p></a><a class="stance" href="#control"><h3>Control <span>After Beer</span></h3><p>A controller keeps the average position of all agents in the centre. It only sees the average.</p></a><a class="stance" href="#conditions"><h3>Conditions <span>After Cheng</span></h3><p>A population that is born and dies on its own, with no ending and no reset.</p></a></div>
+<p>Add a comment on the very first line of your sketch with your choice, for example:</p>
+<div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-com">// Stance: Search (after Ashby)</span></code></pre></div>
+<p>Your stance lists 3 gain values to try. For each one, change <code>let gain</code>. When you’ve tried all 3, leave <code>let gain</code> set to the one you liked best.</p>
+</section>
+
+<section id="recipes">
+<h2 class="plain">Stance Code</h2>
+<section class="recipe" id="conversation"><h3>Conversation <span>After Pask</span></h3><p class="idea">The work follows your mouse, but gets bored if you keep moving the same way.</p><p class="edit"><strong>Edit 1.</strong> Paste this at the very top of your sketch, above <code>let gain</code>.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">let</span> recent = [];
+<span class="t-kw">let</span> attention = <span class="t-num">1</span>;
+
+<span class="t-com">// How different is the mouse movement right now from the last 1.5 seconds?</span>
+<span class="t-kw">function</span> novelty() {
+  <span class="t-kw">const</span> speed = <span class="t-fn">dist</span>(<span class="t-var">mouseX</span>, <span class="t-var">mouseY</span>, <span class="t-var">pmouseX</span>, <span class="t-var">pmouseY</span>);
+  recent.<span class="t-fn">push</span>(speed);
+  <span class="t-kw">if</span> (recent.length &gt; <span class="t-num">90</span>) recent.shift();
+  <span class="t-kw">const</span> avg = recent.reduce((s, v) =&gt; s + v, <span class="t-num">0</span>) / recent.length;
+  <span class="t-kw">return</span> <span class="t-fn">constrain</span>(<span class="t-fn">abs</span>(speed - avg) / <span class="t-num">20</span>, <span class="t-num">0</span>, <span class="t-num">1</span>);   <span class="t-com">// 0 = same as usual, 1 = surprising</span>
+}</code></pre></div><p class="edit"><strong>Edit 2.</strong> Replace the whole <code>update()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> update(reading) {
+  attention = <span class="t-fn">lerp</span>(attention, novelty(), <span class="t-num">0.02</span>);   <span class="t-com">// attention rises with surprise, fades with repetition</span>
+  agents.forEach((a, i) =&gt; {
+    <span class="t-kw">const</span> target = <span class="t-fn">atan2</span>(<span class="t-var">mouseY</span> - a.y, <span class="t-var">mouseX</span> - a.x);
+    a.a += <span class="t-fn">sin</span>(target - a.a) * <span class="t-num">0.1</span> * attention * gain + <span class="t-fn">random</span>(-<span class="t-num">0.1</span>, <span class="t-num">0.1</span>);
+    a.x = (a.x + <span class="t-fn">cos</span>(a.a) * <span class="t-num">1.5</span> + <span class="t-var">width</span>) % <span class="t-var">width</span>;
+    a.y = (a.y + <span class="t-fn">sin</span>(a.a) * <span class="t-num">1.5</span> + <span class="t-var">height</span>) % <span class="t-var">height</span>;
+  });
+}</code></pre></div><p><strong>Gains to try:</strong> 0, 1 and 3.</p><p class="see"><strong>What you should see:</strong> At gain 0 the agents ignore you. At gain 1 and 3 they follow the mouse, but if you move in the same circle for 10 seconds they lose interest. Change how you move and they come back.</p></section><section class="recipe" id="search"><h3>Search <span>After Ashby</span></h3><p class="idea">When the canvas gets too empty or too full, the system throws away its rules and picks new ones at random.</p><p class="edit"><strong>Edit 1.</strong> Paste this at the very top of your sketch, above <code>let gain</code>.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">let</span> rules = { turn: <span class="t-num">1</span>, speed: <span class="t-num">1.5</span>, fade: <span class="t-num">8</span> };
+<span class="t-kw">let</span> outside = <span class="t-num">0</span>;
+<span class="t-kw">let</span> rewirings = <span class="t-num">0</span>;
+
+<span class="t-com">// How full is the canvas? 0 = empty, 1 = full</span>
+<span class="t-kw">function</span> coverage() {
+  <span class="t-fn">loadPixels</span>();
+  <span class="t-kw">let</span> sum = <span class="t-num">0</span>, n = <span class="t-num">0</span>;
+  <span class="t-kw">for</span> (<span class="t-kw">let</span> i = <span class="t-num">0</span>; i &lt; <span class="t-var">pixels</span>.length; i += <span class="t-num">4</span> * <span class="t-num">97</span>) { sum += <span class="t-var">pixels</span>[i]; n++; }
+  <span class="t-kw">return</span> sum / n / <span class="t-num">255</span>;
+}
+
+<span class="t-com">// Pick new rules at random, like Ashby&#x27;s Homeostat</span>
+<span class="t-kw">function</span> rewire() {
+  rules = { turn: <span class="t-fn">random</span>(-<span class="t-num">2</span>, <span class="t-num">2</span>), speed: <span class="t-fn">random</span>(<span class="t-num">0.5</span>, <span class="t-num">3</span>), fade: <span class="t-fn">random</span>(<span class="t-num">2</span>, <span class="t-num">20</span>) };
+  rewirings++;
+}</code></pre></div><p class="edit"><strong>Edit 2.</strong> Replace the whole <code>update()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> update(reading) {
+  agents.forEach((a, i) =&gt; {
+    a.a += (reading[i] - <span class="t-num">0.5</span>) * rules.turn * gain + <span class="t-fn">random</span>(-<span class="t-num">0.1</span>, <span class="t-num">0.1</span>);
+    a.x = (a.x + <span class="t-fn">cos</span>(a.a) * rules.speed + <span class="t-var">width</span>) % <span class="t-var">width</span>;
+    a.y = (a.y + <span class="t-fn">sin</span>(a.a) * rules.speed + <span class="t-var">height</span>) % <span class="t-var">height</span>;
+  });
+  <span class="t-com">// Check every 10 frames; after about a second out of range, rewire</span>
+  <span class="t-kw">if</span> (<span class="t-var">frameCount</span> % <span class="t-num">10</span> === <span class="t-num">0</span>) {
+    <span class="t-kw">const</span> cov = coverage();
+    <span class="t-kw">if</span> (cov &lt; <span class="t-num">0.12</span> || cov &gt; <span class="t-num">0.6</span>) outside++; <span class="t-kw">else</span> outside = <span class="t-num">0</span>;
+    <span class="t-kw">if</span> (outside &gt; <span class="t-num">6</span>) { rewire(); outside = <span class="t-num">0</span>; }
+  }
+}</code></pre></div><p class="edit"><strong>Edit 3.</strong> Replace the whole <code>render()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> render() {
+  <span class="t-fn">noStroke</span>();
+  <span class="t-fn">fill</span>(<span class="t-num">20</span>, rules.fade);
+  <span class="t-fn">rect</span>(<span class="t-num">0</span>, <span class="t-num">0</span>, <span class="t-var">width</span>, <span class="t-var">height</span>);
+  <span class="t-fn">fill</span>(<span class="t-num">240</span>, <span class="t-num">170</span>, <span class="t-num">50</span>, <span class="t-num">60</span>);
+  agents.forEach(a =&gt; <span class="t-fn">circle</span>(a.x, a.y, <span class="t-num">3</span>));
+  <span class="t-fn">fill</span>(<span class="t-num">255</span>);
+  <span class="t-fn">text</span>(<span class="t-str">`rewirings: ${rewirings}`</span>, <span class="t-num">10</span>, <span class="t-num">20</span>);
+}</code></pre></div><p><strong>Gains to try:</strong> 0, 1 and 3.</p><p class="see"><strong>What you should see:</strong> The rewirings counter goes up every time the system fails and picks new rules. Each rewiring changes how the image looks. Sooner or later it finds rules that keep it in range and stops changing.</p></section><section class="recipe" id="resonance"><h3>Resonance <span>After Lucier</span></h3><p class="idea">The canvas is fed back into itself, slightly larger and blurrier, until only the process is left.</p><p class="edit"><strong>Edit 1.</strong> Paste this at the very top of your sketch, above <code>let gain</code>.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">let</span> feeding = <span class="t-kw">true</span>;
+
+<span class="t-com">// Press the space bar to stop and start the agents drawing</span>
+<span class="t-kw">function</span> <span class="t-cb">keyPressed</span>() {
+  <span class="t-kw">if</span> (<span class="t-var">key</span> === <span class="t-str">&#x27; &#x27;</span>) feeding = !feeding;
+}</code></pre></div><p class="edit"><strong>Edit 2.</strong> Replace the whole <code>render()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> render() {
+  <span class="t-com">// Redraw the last frame, slightly larger: the loop</span>
+  <span class="t-kw">const</span> prev = <span class="t-fn">get</span>();
+  <span class="t-fn">push</span>();
+  <span class="t-fn">translate</span>(<span class="t-var">width</span> / <span class="t-num">2</span>, <span class="t-var">height</span> / <span class="t-num">2</span>);
+  <span class="t-fn">scale</span>(<span class="t-num">1</span> + <span class="t-num">0.005</span> * gain);
+  <span class="t-fn">image</span>(prev, -<span class="t-var">width</span> / <span class="t-num">2</span>, -<span class="t-var">height</span> / <span class="t-num">2</span>);
+  <span class="t-fn">pop</span>();
+  <span class="t-kw">if</span> (<span class="t-var">frameCount</span> % <span class="t-num">5</span> === <span class="t-num">0</span>) <span class="t-fn">filter</span>(<span class="t-var">BLUR</span>, <span class="t-num">1</span>);   <span class="t-com">// a little is lost each time</span>
+
+  <span class="t-kw">if</span> (feeding) {
+    <span class="t-fn">noStroke</span>();
+    <span class="t-fn">fill</span>(<span class="t-num">240</span>, <span class="t-num">170</span>, <span class="t-num">50</span>, <span class="t-num">60</span>);
+    agents.forEach(a =&gt; <span class="t-fn">circle</span>(a.x, a.y, <span class="t-num">3</span>));
+  }
+}</code></pre></div><p><strong>Gains to try:</strong> 0, 1 and 3.</p><p class="see"><strong>What you should see:</strong> At gain 0 the marks just blur in place. At 1 and 3 they bloom outwards. Press the space bar to stop the agents and watch what the loop does on its own.</p></section><section class="recipe" id="exposure"><h3>Exposure <span>After Haacke</span></h3><p class="idea">Agents compete for a resource on the ground. The more they have, the more they can take.</p><p class="edit"><strong>Edit 1.</strong> Paste this at the very top of your sketch, above <code>let gain</code>.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">const</span> COLS = <span class="t-num">30</span>;   <span class="t-com">// the ground is a 30 x 30 grid</span>
+<span class="t-kw">let</span> res = [];      <span class="t-com">// how much resource is left in each square</span>
+
+<span class="t-kw">function</span> cellOf(a) {
+  <span class="t-kw">const</span> cx = <span class="t-fn">constrain</span>(<span class="t-fn">floor</span>(a.x / <span class="t-var">width</span> * COLS), <span class="t-num">0</span>, COLS - <span class="t-num">1</span>);
+  <span class="t-kw">const</span> cy = <span class="t-fn">constrain</span>(<span class="t-fn">floor</span>(a.y / <span class="t-var">height</span> * COLS), <span class="t-num">0</span>, COLS - <span class="t-num">1</span>);
+  <span class="t-kw">return</span> cx + cy * COLS;
+}</code></pre></div><p class="edit"><strong>Edit 2.</strong> Replace the whole <code>setup()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> <span class="t-cb">setup</span>() {
+  <span class="t-fn">createCanvas</span>(<span class="t-num">600</span>, <span class="t-num">600</span>);
+  <span class="t-fn">pixelDensity</span>(<span class="t-num">1</span>);
+  <span class="t-kw">for</span> (<span class="t-kw">let</span> i = <span class="t-num">0</span>; i &lt; COLS * COLS; i++) res.<span class="t-fn">push</span>(<span class="t-num">1</span>);
+  <span class="t-kw">for</span> (<span class="t-kw">let</span> i = <span class="t-num">0</span>; i &lt; <span class="t-num">200</span>; i++) {
+    agents.<span class="t-fn">push</span>({ x: <span class="t-fn">random</span>(<span class="t-var">width</span>), y: <span class="t-fn">random</span>(<span class="t-var">height</span>), a: <span class="t-fn">random</span>(<span class="t-var">TWO_PI</span>), wealth: <span class="t-num">0</span> });
+  }
+}</code></pre></div><p class="edit"><strong>Edit 3.</strong> Replace the whole <code>update()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> update(reading) {
+  agents.forEach(a =&gt; {
+    <span class="t-kw">const</span> c = cellOf(a);
+    <span class="t-kw">const</span> take = <span class="t-fn">min</span>(res[c], <span class="t-num">0.02</span> * (<span class="t-num">1</span> + a.wealth * gain));   <span class="t-com">// the rich take more</span>
+    res[c] -= take;
+    a.wealth += take;
+    a.a += (<span class="t-num">1</span> - res[c]) * <span class="t-fn">random</span>(-<span class="t-num">1</span>, <span class="t-num">1</span>);   <span class="t-com">// wander more where the ground is bare</span>
+    a.x = (a.x + <span class="t-fn">cos</span>(a.a) * <span class="t-num">1.5</span> + <span class="t-var">width</span>) % <span class="t-var">width</span>;
+    a.y = (a.y + <span class="t-fn">sin</span>(a.a) * <span class="t-num">1.5</span> + <span class="t-var">height</span>) % <span class="t-var">height</span>;
+  });
+  <span class="t-kw">for</span> (<span class="t-kw">let</span> i = <span class="t-num">0</span>; i &lt; res.length; i++) res[i] = <span class="t-fn">min</span>(<span class="t-num">1</span>, res[i] + <span class="t-num">0.001</span>);   <span class="t-com">// slow regrowth</span>
+}</code></pre></div><p class="edit"><strong>Edit 4.</strong> Replace the whole <code>render()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> render() {
+  <span class="t-fn">background</span>(<span class="t-num">20</span>);
+  <span class="t-fn">noStroke</span>();
+  <span class="t-kw">const</span> s = <span class="t-var">width</span> / COLS;
+  <span class="t-kw">for</span> (<span class="t-kw">let</span> i = <span class="t-num">0</span>; i &lt; res.length; i++) {
+    <span class="t-fn">fill</span>(<span class="t-num">60</span>, <span class="t-num">110</span>, <span class="t-num">100</span>, res[i] * <span class="t-num">255</span>);
+    <span class="t-fn">rect</span>((i % COLS) * s, <span class="t-fn">floor</span>(i / COLS) * s, s, s);
+  }
+  <span class="t-fn">fill</span>(<span class="t-num">240</span>, <span class="t-num">170</span>, <span class="t-num">50</span>, <span class="t-num">180</span>);
+  agents.forEach(a =&gt; <span class="t-fn">circle</span>(a.x, a.y, <span class="t-fn">min</span>(<span class="t-num">30</span>, <span class="t-num">2</span> + <span class="t-fn">sqrt</span>(a.wealth) * <span class="t-num">2</span>)));
+}</code></pre></div><p><strong>Gains to try:</strong> 0, 1 and 3.</p><p class="see"><strong>What you should see:</strong> The green ground empties where agents feed. At gain 0 everyone stays roughly the same size. At higher gains a few agents grow much bigger than the rest.</p></section><section class="recipe" id="control"><h3>Control <span>After Beer</span></h3><p class="idea">A controller keeps the average position of all agents in the centre. It only sees the average.</p><p class="edit"><strong>Edit 1.</strong> Paste this at the very top of your sketch, above <code>let gain</code>.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">let</span> avg = { cx: <span class="t-num">300</span>, cy: <span class="t-num">300</span> };   <span class="t-com">// everything the controller knows</span></code></pre></div><p class="edit"><strong>Edit 2.</strong> Replace the whole <code>sense()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> sense() {
+  <span class="t-kw">const</span> cx = agents.reduce((s, a) =&gt; s + a.x, <span class="t-num">0</span>) / agents.length;
+  <span class="t-kw">const</span> cy = agents.reduce((s, a) =&gt; s + a.y, <span class="t-num">0</span>) / agents.length;
+  avg = { cx, cy };
+  <span class="t-kw">return</span> avg;
+}</code></pre></div><p class="edit"><strong>Edit 3.</strong> Replace the whole <code>update()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> update(r) {
+  <span class="t-com">// The controller wants the average in the centre, and pushes everyone to get it there</span>
+  <span class="t-kw">const</span> errX = <span class="t-var">width</span> / <span class="t-num">2</span> - r.cx;
+  <span class="t-kw">const</span> errY = <span class="t-var">height</span> / <span class="t-num">2</span> - r.cy;
+  agents.forEach(a =&gt; {
+    a.a += <span class="t-fn">random</span>(-<span class="t-num">0.3</span>, <span class="t-num">0.3</span>);
+    a.x = <span class="t-fn">constrain</span>(a.x + <span class="t-fn">cos</span>(a.a) * <span class="t-num">1.5</span> + errX * <span class="t-num">0.01</span> * gain, <span class="t-num">0</span>, <span class="t-var">width</span>);
+    a.y = <span class="t-fn">constrain</span>(a.y + <span class="t-fn">sin</span>(a.a) * <span class="t-num">1.5</span> + errY * <span class="t-num">0.01</span> * gain, <span class="t-num">0</span>, <span class="t-var">height</span>);
+  });
+}</code></pre></div><p class="edit"><strong>Edit 4.</strong> Replace the whole <code>render()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> render() {
+  <span class="t-fn">noStroke</span>();
+  <span class="t-fn">fill</span>(<span class="t-num">20</span>, <span class="t-num">8</span>);
+  <span class="t-fn">rect</span>(<span class="t-num">0</span>, <span class="t-num">0</span>, <span class="t-var">width</span>, <span class="t-var">height</span>);
+  <span class="t-com">// Colour shows crowding, which the controller never sees</span>
+  agents.forEach(a =&gt; {
+    <span class="t-kw">const</span> crowd = agents.<span class="t-fn">filter</span>(o =&gt; <span class="t-fn">dist</span>(a.x, a.y, o.x, o.y) &lt; <span class="t-num">20</span>).length;
+    <span class="t-fn">fill</span>(<span class="t-fn">map</span>(crowd, <span class="t-num">1</span>, <span class="t-num">15</span>, <span class="t-num">60</span>, <span class="t-num">255</span>), <span class="t-num">120</span>, <span class="t-num">80</span>, <span class="t-num">120</span>);
+    <span class="t-fn">circle</span>(a.x, a.y, <span class="t-num">3</span>);
+  });
+  <span class="t-com">// The white ring is the controller&#x27;s whole view of the world</span>
+  <span class="t-fn">noFill</span>();
+  <span class="t-fn">stroke</span>(<span class="t-num">255</span>);
+  <span class="t-fn">circle</span>(avg.cx, avg.cy, <span class="t-num">16</span>);
+}</code></pre></div><p><strong>Gains to try:</strong> 0, 50 and 250 (this stance needs bigger numbers).</p><p class="see"><strong>What you should see:</strong> The white ring is the average. At 50 the controller holds it in the centre, even while the coloured agents clump and scatter. At 250 it over-steers and the whole group swings back and forth.</p></section><section class="recipe" id="conditions"><h3>Conditions <span>After Cheng</span></h3><p class="idea">A population that is born and dies on its own, with no ending and no reset.</p><p class="edit"><strong>Edit 1.</strong> Paste this at the very top of your sketch, above <code>let gain</code>.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">let</span> popHistory = [];</code></pre></div><p class="edit"><strong>Edit 2.</strong> Replace the whole <code>sense()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-com">// The system reads its own population, as it was two seconds ago</span>
+<span class="t-kw">function</span> sense() {
+  popHistory.<span class="t-fn">push</span>(agents.length);
+  <span class="t-kw">if</span> (popHistory.length &gt; <span class="t-num">120</span>) popHistory.shift();
+  <span class="t-kw">return</span> popHistory[<span class="t-num">0</span>];
+}</code></pre></div><p class="edit"><strong>Edit 3.</strong> Replace the whole <code>update()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> update(pastPop) {
+  <span class="t-com">// The bigger the population was, the fewer births now</span>
+  <span class="t-kw">const</span> pBirth = <span class="t-fn">constrain</span>(<span class="t-num">0.01</span> * (<span class="t-num">1</span> - gain * pastPop / <span class="t-num">300</span>), <span class="t-num">0</span>, <span class="t-num">0.02</span>);
+  <span class="t-kw">const</span> born = [];
+  agents.forEach(a =&gt; {
+    a.a += <span class="t-fn">random</span>(-<span class="t-num">0.2</span>, <span class="t-num">0.2</span>);
+    a.x = (a.x + <span class="t-fn">cos</span>(a.a) * <span class="t-num">1.5</span> + <span class="t-var">width</span>) % <span class="t-var">width</span>;
+    a.y = (a.y + <span class="t-fn">sin</span>(a.a) * <span class="t-num">1.5</span> + <span class="t-var">height</span>) % <span class="t-var">height</span>;
+    <span class="t-kw">if</span> (<span class="t-fn">random</span>() &lt; pBirth &amp;&amp; agents.length &lt; <span class="t-num">2000</span>) {
+      born.<span class="t-fn">push</span>({ x: a.x, y: a.y, a: <span class="t-fn">random</span>(<span class="t-var">TWO_PI</span>) });
+    }
+  });
+  agents = agents.<span class="t-fn">filter</span>(() =&gt; <span class="t-fn">random</span>() &gt; <span class="t-num">0.004</span>).concat(born);   <span class="t-com">// a small chance of death each frame</span>
+}</code></pre></div><p class="edit"><strong>Edit 4.</strong> Replace the whole <code>render()</code> function with this.</p><div class="code"><button class="copy" type="button">Copy</button><pre><code><span class="t-kw">function</span> render() {
+  <span class="t-fn">noStroke</span>();
+  <span class="t-fn">fill</span>(<span class="t-num">20</span>, <span class="t-num">8</span>);
+  <span class="t-fn">rect</span>(<span class="t-num">0</span>, <span class="t-num">0</span>, <span class="t-var">width</span>, <span class="t-var">height</span>);
+  <span class="t-fn">fill</span>(<span class="t-num">240</span>, <span class="t-num">170</span>, <span class="t-num">50</span>, <span class="t-num">60</span>);
+  agents.forEach(a =&gt; <span class="t-fn">circle</span>(a.x, a.y, <span class="t-num">3</span>));
+  <span class="t-fn">fill</span>(<span class="t-num">20</span>);
+  <span class="t-fn">rect</span>(<span class="t-num">0</span>, <span class="t-num">0</span>, <span class="t-num">170</span>, <span class="t-num">28</span>);
+  <span class="t-fn">fill</span>(<span class="t-num">255</span>);
+  <span class="t-fn">text</span>(<span class="t-str">`population: ${agents.length}`</span>, <span class="t-num">10</span>, <span class="t-num">19</span>);
+}</code></pre></div><p><strong>Gains to try:</strong> 0, 1 and 3.</p><p class="see"><strong>What you should see:</strong> Watch the population number. At gain 0 it keeps growing until it hits the limit. At 1 it levels off. At 3 it swings between booms and crashes, because it is reacting to where it was two seconds ago.</p></section>
+</section>
+
+<section id="problems">
+<h2 class="plain">Troubleshooting</h2>
+<dl>
+  <dt>The Canvas Goes Black, or Fills Solid White</dt>
+  <dd>At some gains the system dies out or runs away. That’s a real result; try the other gains on your stance’s list.</dd>
+  <dt>The Sketch Is Very Slow</dt>
+  <dd>Change the <code>200</code> in <code>setup()</code> to <code>100</code> for fewer agents.</dd>
+</dl>
+</section>
+
+</main>
+<script>
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.addEventListener('click',async()=>{
+    const text=btn.nextElementSibling.innerText;
+    let ok=false;
+    try{ await navigator.clipboard.writeText(text); ok=true; }catch(_){
+      const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+      try{ ok=document.execCommand('copy'); }catch(__){} ta.remove();
+    }
+    btn.textContent=ok?'Copied':'Select and copy';
+    setTimeout(()=>btn.textContent='Copy',1800);
+  });
+});
+</script>
+</body>
+</html>
